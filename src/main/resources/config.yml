@@ -1,0 +1,68 @@
+messages:
+  unknownCommand: "%hataprefix%Hatalı bir komut girdiniz! Komutların listesi için &b/komutlar &cyazınız."
+  disallowedName: "Güvenlik gerekçesiyle bu isimle giriş yapmak yasaktır."
+  dispenserFix: "%hataprefix%Bazı açıklardan dolayı fırlatıcıya eşya çerçevesi koyulması engellenmiştir!"
+  configReloaded: "%bilgiprefix%Yapılandırma yenilendi!"
+  noPermission: "%hataprefix%Bunun için izniniz yok!"
+  enderPearlCooldown: "%hataprefix%Ender incisi kullanmak için &6%s &csaniye daha beklemelisin!"
+  playerLootBelongToSomeoneElse: "%dikkatprefix%&6Öldürdüğünüz oyuncunun ganimeti en çok hasarı veren &a%lootOwner% &6üzerine 10 saniye boyunca zimmetlendi."
+  mobLootBelongToSomeoneElse: "%dikkatprefix%&6Öldürdüğünüz yaratığın ganimeti en çok hasarı veren &a%lootOwner% &6üzerine 10 saniye boyunca zimmetlendi."
+  lootBelongToYou: "%bilgiprefix%Ganimetiniz 10 saniye boyunca size zimmetlendi. Bu süre boyunca diğer oyuncular ganimetinizi alamaz!"
+  lootProtectionTimedOut: "%dikkatprefix%Ganimetinizin koruması kalktı! Eğer eşyaları hala almadıysanız başkaları alabilir!"
+  commandChatColorUsage: |
+    &a--- Kullanabileceğiniz Renkler ---
+    &f&l• &aYeşil, &bAçık_Mavi, &cAçık_Kırmızı, &dEflatun,
+    &f&l• &eSarı, &fBeyaz, &0Siyah, &1Koyu_Mavi,
+    &f&l• &2Koyu_Yeşil, &3Turkuaz, &4Koyu_Kırmızı, &5Koyu_Mor,
+    &f&l• &6Turuncu, &7Gri, &8Koyu_Gri, &9Mavi
+    &aÖrnek Kullanım: &b/renk Açık_Mavi
+  commandChatColorWrongColor: "%hataprefix%Hatalı bir renk adı girdiniz!"
+  commandChatColorSuccess: "%bilgiprefix%Konuşma renginiz %s olarak değiştirildi!"
+  commandCommandsHeader: '&e--------------- &rKomutlar: sayfa %page%/%maxpage% &e---------------'
+  commandCommandsNextPage: '&eBir sonraki sayfaya geçmek için &b/komutlar %page% &ekomutunu kullanın.'
+  commandCommandsContent: # TODO
+    - '&6/auction: &rAçık arttırma sisteminin ana komutudur.'
+    - '&6/back: &rIşınlanmadan ya da ölmeden önceki konumunuza döndürür. (VIP ve UVIP)'
+    - '&6/balance: &rPara miktarınızı gösterir.'
+    - '&6/bid: &rAçık arttırmaya belirttiğiniz teklifi verir.'
+    - '&6/challenges: &rSkyblock görevlerini gösterir.'
+    - '&6/clearinventory: &rEnvanterinizi sıfırlar.'
+    - '&6/ct: &rBir savaştaysanız kalan süreyi gösterir.'
+    - '&6/duyuru: &rAda warpı reklamı gibi duyurularınızı yapabileceğiniz komut.'
+  youCantFlyHere: '%hataprefix%Bu alanda uçamazsınız!'
+  youCantTeleportThere: '%hataprefix%Işınlanma güvenlik sebebiyle iptal edildi!'
+  webInCombatDisabled: "%hataprefix%Savaş esnasında örümcek ağı koyamazsınız!"
+settings:
+  enderPearlCooldown: 3 # in seconds
+  lootProtectionTimeout: 10 # in seconds
+  entityLimits: # This limits the maximum entitiy in specified range. Different entity types won't count.
+    range: 16
+    breeding: 32
+    natural: 16
+    spawner: 32
+    spawnegg: 32
+commandInstances:
+  "iteminfo": "itemdb"
+  "elsat": "sell hand"
+  "envsat": "sell inventory"
+  "help": "komutlar"
+  "kurallar": "rules"
+  "kafa": "skull"
+  "sandık": "pv"
+  "chest": "pv"
+  "kasa": "crates"
+  "kasalar": "crates"
+  "warp market": "market"
+npcCommands:
+  '0': bilgi
+allowedCommands: # Commands must be lowercase.
+  player:
+    - komutlar
+    - renk
+  moderator:
+    - kick
+    - kilitkir
+flyDisabledRegions:
+  - arena
+teleportDisabledRegions:
+  - noTeleportZone
