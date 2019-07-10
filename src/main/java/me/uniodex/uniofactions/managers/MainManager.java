@@ -3,7 +3,6 @@ package me.uniodex.uniofactions.managers;
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
 import lombok.Getter;
-import lombok.Setter;
 import me.uniodex.uniofactions.UnioFactions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class MainManager {
 
@@ -20,43 +18,11 @@ public class MainManager {
     private Map<Integer, List<String>> commandListPages;
     @Getter
     private Map<String, String> commands = new HashMap<>();
-    @Getter
-    private Map<String, Long> enderPearlUsers = new ConcurrentHashMap<>();
-    @Getter
-    @Setter
-    private long enderPearlCooldown;
-    @Getter
-    private List<String> noFlyZones = new ArrayList<>();
-    @Getter
-    private List<String> noTeleportZones = new ArrayList<>();
-
-    @Getter
-    int entityLimitRange;
-    @Getter
-    int entityBreedingLimit;
-    @Getter
-    int entityNaturalLimit;
-    @Getter
-    int entitySpawnerLimit;
-    @Getter
-    int entitySpawnEggLimit;
 
     public MainManager(UnioFactions plugin) {
         this.plugin = plugin;
-        setupVariables();
         updateCommandListPages();
         loadCommandInstances();
-    }
-
-    public void setupVariables() {
-        enderPearlCooldown = plugin.getConfig().getLong("settings.enderPearlCooldown", 3) * 1000;
-        noFlyZones.addAll(plugin.getConfig().getStringList("flyDisabledRegions"));
-        noTeleportZones.addAll(plugin.getConfig().getStringList("teleportDisabledRegions"));
-        entityLimitRange = plugin.getConfig().getInt("settings.entityLimits.range");
-        entityBreedingLimit = plugin.getConfig().getInt("settings.entityLimits.breeding");
-        entityNaturalLimit = plugin.getConfig().getInt("settings.entityLimits.natural");
-        entitySpawnerLimit = plugin.getConfig().getInt("settings.entityLimits.spawner");
-        entitySpawnEggLimit = plugin.getConfig().getInt("settings.entityLimits.spawnegg");
     }
 
     public void updateCommandListPages() {

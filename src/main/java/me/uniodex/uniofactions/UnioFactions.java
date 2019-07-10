@@ -9,12 +9,10 @@ import me.uniodex.uniofactions.commands.CmdCommands;
 import me.uniodex.uniofactions.commands.CmdTpchunk;
 import me.uniodex.uniofactions.commands.CmdUniofactions;
 import me.uniodex.uniofactions.listeners.CitizensListeners;
-import me.uniodex.uniofactions.listeners.LootProtectionListeners;
 import me.uniodex.uniofactions.listeners.PlayerListeners;
 import me.uniodex.uniofactions.listeners.ProtectionListeners;
 import me.uniodex.uniofactions.managers.ChatColorManager;
 import me.uniodex.uniofactions.managers.ConfigManager;
-import me.uniodex.uniofactions.managers.LootProtectionManager;
 import me.uniodex.uniofactions.managers.MainManager;
 import me.uniodex.uniofactions.utils.Utils;
 import org.bukkit.Bukkit;
@@ -35,8 +33,6 @@ public class UnioFactions extends JavaPlugin {
     private MythicMobs mythicMobs;
     @Getter
     private WorldGuardPlugin worldGuard;
-    @Getter
-    private LootProtectionManager lootProtectionManager;
     @Getter
     private ConfigManager configManager;
     @Getter
@@ -74,14 +70,12 @@ public class UnioFactions extends JavaPlugin {
         // Managers
         configManager = new ConfigManager(this);
         mainManager = new MainManager(this);
-        lootProtectionManager = new LootProtectionManager(this);
         chatColorManager = new ChatColorManager(this);
 
         // Listeners
         if (Bukkit.getPluginManager().isPluginEnabled("Citizens")) {
             new CitizensListeners(this);
         }
-        new LootProtectionListeners(this);
         new PlayerListeners(this);
         new ProtectionListeners(this);
 
@@ -100,7 +94,6 @@ public class UnioFactions extends JavaPlugin {
 
     public void reload() {
         reloadConfig();
-        getMainManager().setupVariables();
         getMainManager().updateCommandListPages();
         getMainManager().loadCommandInstances();
     }
@@ -118,6 +111,8 @@ public class UnioFactions extends JavaPlugin {
             return;
         }
         File[] files = folder.listFiles();
+
+        if (files == null) return;
 
         int deleted = 0;
         for (File file : files) {
