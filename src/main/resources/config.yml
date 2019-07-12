@@ -24,6 +24,12 @@ messages:
     - '&6/ct: &rBir savaştaysanız kalan süreyi gösterir.'
     - '&6/duyuru: &rAda warpı reklamı gibi duyurularınızı yapabileceğiniz komut.'
   webInCombatDisabled: "%hataprefix%Savaş esnasında örümcek ağı koyamazsınız!"
+  chatHover: |
+    &aGönderme Zamanı: &b%time%
+    &aPara: &b%vault_eco_balance_formatted%
+    &a
+    &aÖldürme/Ölme Oranı: &b%uniostats_kdr%
+    &aGüç: &b%factionsuuid_player_power% 
 commandInstances:
   "iteminfo": "itemdb"
   "elsat": "sell hand"

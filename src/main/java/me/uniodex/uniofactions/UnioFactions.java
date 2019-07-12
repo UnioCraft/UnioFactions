@@ -21,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Date;
+import java.util.logging.Level;
 
 public class UnioFactions extends JavaPlugin {
 
@@ -65,6 +66,10 @@ public class UnioFactions extends JavaPlugin {
 
         if (Bukkit.getPluginManager().isPluginEnabled("CombatLogX")) {
             combatLogX = (CombatLogX) Bukkit.getPluginManager().getPlugin("CombatLogX");
+        }
+
+        if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            Bukkit.getLogger().log(Level.SEVERE, "PlaceholderAPI couldn't find. It might cause issues.");
         }
 
         // Managers
