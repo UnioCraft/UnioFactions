@@ -3,7 +3,7 @@ main: me.uniodex.uniofactions.UnioFactions
 author: 'UnioDex'
 version: 2.0
 
-depend: [Factions, WorldGuard]
+depend: [Factions, WorldGuard, Vault]
 softdepend: [Citizens, MythicMobs, CombatLogX, PlaceholderAPI]
 
 commands:

@@ -70,9 +70,8 @@ public class PlayerListeners implements Listener {
             } catch (UnknownFormatConversionException ex) {
                 return;
             }
-
-            event.getRecipients().clear();
         }
+		event.getRecipients().clear();
         //
     }
 

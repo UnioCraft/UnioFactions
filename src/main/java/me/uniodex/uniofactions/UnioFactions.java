@@ -14,9 +14,12 @@ import me.uniodex.uniofactions.listeners.ProtectionListeners;
 import me.uniodex.uniofactions.managers.ChatColorManager;
 import me.uniodex.uniofactions.managers.ConfigManager;
 import me.uniodex.uniofactions.managers.MainManager;
+import me.uniodex.uniofactions.managers.VIPManager;
 import me.uniodex.uniofactions.utils.Utils;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -41,9 +44,13 @@ public class UnioFactions extends JavaPlugin {
     @Getter
     private MainManager mainManager;
     @Getter
+    private VIPManager vipManager;
+    @Getter
     private static UnioFactions instance;
     @Getter
     private CombatLogX combatLogX;
+    @Getter
+    private Permission permission;
 
     public void onEnable() {
         instance = this;
@@ -72,10 +79,16 @@ public class UnioFactions extends JavaPlugin {
             Bukkit.getLogger().log(Level.SEVERE, "PlaceholderAPI couldn't find. It might cause issues.");
         }
 
+        if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
+            RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+            permission = rsp.getProvider();
+        }
+
         // Managers
         configManager = new ConfigManager(this);
         mainManager = new MainManager(this);
         chatColorManager = new ChatColorManager(this);
+        vipManager = new VIPManager((this));
 
         // Listeners
         if (Bukkit.getPluginManager().isPluginEnabled("Citizens")) {
