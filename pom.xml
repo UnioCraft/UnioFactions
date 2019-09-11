@@ -127,12 +127,28 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>Jobs</groupId>
+            <artifactId>Jobs</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${library112}/Jobs4.13.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>UCI</groupId>
+            <artifactId>UCI</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${library112}/UnioCustomItems.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <library>C:\Users\Work\Documents\lib</library>
+        <library112>C:\Users\Work\Documents\lib\1.12</library112>
     </properties>
 
     <packaging>jar</packaging>

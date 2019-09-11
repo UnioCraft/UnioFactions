@@ -9,12 +9,10 @@ import me.uniodex.uniofactions.commands.CmdCommands;
 import me.uniodex.uniofactions.commands.CmdTpchunk;
 import me.uniodex.uniofactions.commands.CmdUniofactions;
 import me.uniodex.uniofactions.listeners.CitizensListeners;
+import me.uniodex.uniofactions.listeners.JobsListeners;
 import me.uniodex.uniofactions.listeners.PlayerListeners;
 import me.uniodex.uniofactions.listeners.ProtectionListeners;
-import me.uniodex.uniofactions.managers.ChatColorManager;
-import me.uniodex.uniofactions.managers.ConfigManager;
-import me.uniodex.uniofactions.managers.MainManager;
-import me.uniodex.uniofactions.managers.VIPManager;
+import me.uniodex.uniofactions.managers.*;
 import me.uniodex.uniofactions.utils.Utils;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -45,6 +43,10 @@ public class UnioFactions extends JavaPlugin {
     private MainManager mainManager;
     @Getter
     private VIPManager vipManager;
+    @Getter
+    private JobsManager jobsManager;
+    @Getter
+    private QuestManager questManager;
     @Getter
     private static UnioFactions instance;
     @Getter
@@ -89,6 +91,12 @@ public class UnioFactions extends JavaPlugin {
         mainManager = new MainManager(this);
         chatColorManager = new ChatColorManager(this);
         vipManager = new VIPManager((this));
+        questManager = new QuestManager((this));
+
+        if (Bukkit.getPluginManager().isPluginEnabled("Jobs")) {
+            jobsManager = new JobsManager((this));
+            new JobsListeners(this);
+        }
 
         // Listeners
         if (Bukkit.getPluginManager().isPluginEnabled("Citizens")) {

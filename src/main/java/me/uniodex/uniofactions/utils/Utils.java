@@ -1,10 +1,17 @@
 package me.uniodex.uniofactions.utils;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.uniodex.uniofactions.UnioFactions;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Utils {
 
@@ -62,5 +69,17 @@ public class Utils {
 
     public static String colorizeMessage(String message) {
         return ChatColor.translateAlternateColorCodes('&', message.replaceAll("%hataprefix%", UnioFactions.hataPrefix).replaceAll("%bilgiprefix%", UnioFactions.bilgiPrefix).replaceAll("%dikkatprefix%", UnioFactions.dikkatPrefix).replaceAll("%prefix%", UnioFactions.bilgiPrefix));
+    }
+
+    public static boolean isLocationInArea(Location location, String area) {
+        List<String> regionIds = new ArrayList<>();
+        RegionManager regionManager = WorldGuardPlugin.inst().getRegionManager(location.getWorld());
+        ApplicableRegionSet regionsAtLocation = regionManager.getApplicableRegions(location);
+
+        for (ProtectedRegion region : regionsAtLocation) {
+            regionIds.add(region.getId());
+        }
+
+        return regionIds.contains(area);
     }
 }

@@ -32,6 +32,10 @@ messages:
     &aGüç: &b%factionsuuid_player_power%
   invalidVIPType: "%hataprefix%Hatalı bir VIP türü girdiniz."
   vipRewardHasGiven: "%bilgiprefix%VIP ödülü başarıyla verildi."
+  commandJobRewardNoPlayer: "%hataprefix%Belirttiğiniz oyuncu oyunda değil."
+  commandJobRewardNoQuest: "%hataprefix%Belirttiğiniz görev mevcut değil."
+  commandJobRewardOneTime: "%hataprefix%Bu görevden sadece bir kez ödül alabilirsiniz."
+  commandJobRewardSuccess: "%bilgiprefix%Görev ödüllerini başarıyla aldınız!"
 commandInstances:
   "iteminfo": "itemdb"
   "elsat": "sell hand"
@@ -46,3 +50,103 @@ commandInstances:
   "warp market": "market"
 npcCommands:
   '0': bilgi
+mineNames: #TODO
+  default: "maden"
+  vip: "vipmaden"
+  uvip: "uvipmaden"
+  uvip+: "uvip+maden"
+questRewards:
+  madencininsavaskiti:
+    - lp user %player% permission set essentials.kits.MadencininSavasKiti
+  madencininaletkiti:
+    - lp user %player% permission set essentials.kits.MadencininAletKiti
+  madencigunlukgorev:
+    - eco give %player% 150000
+    - jobs grantxp %player% Madenci 5000
+  kedigozuozelligi:
+    - lp user %player% permission set uci.catvision
+  enerjiicecegiozelligi:
+    - lp user %player% permission set uci.energydrink
+  insaatcigunlukgorev:
+    - eco give %player% 10000
+    - jobs grantxp %player% İnşaatçı 1000
+  ganimetkilici:
+    - uci give ganimetKilici %player%
+  satisasasi:
+    - uci give satisAsasi %player%
+  ciftcigunlukgorev:
+    - eco give %player% 10000
+    - jobs grantxp %player% Çiftçi 1000
+  pembepencebossu:
+    - uci give pembepenceYumurta %player%
+  avcigunlukgorev:
+    - eco give %player% 50000
+    - jobs grantxp %player% Avcı 2500
+    - give %player% 383:100 1
+    - give %player% 383:90 1
+  bossavcisikiti:
+    - lp user %player% permission set essentials.kits.BossAvcisiKiti
+  bossavcisigunlukgorev:
+    - eco give %player% 100000
+    - jobs grantxp %player% Boss_Avcısı 5000
+  vipgucuvevipdirenci:
+    - lp user %player% permission settemp unioperks.strength true 30d accumulate
+    - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+  kelleavcisigunlukgorev:
+    - eco give %player% 25000
+    - jobs grantxp %player% Kelle_Avcısı 2500
+  elislemesisavaskiti:
+    - lp user %player% permission set essentials.kits.ElIslemesiSavasKiti
+  tamirhakki:
+    - lp user %player% permission set essentials.repair
+  zanaatkargunlukgorev:
+    - eco give %player% 5000
+    - jobs grantxp %player% Zanaatkar 500
+  tamirasasi:
+    - uci give tamirAsasi %player%
+  demircininruyakazmasi:
+    - uci give demircininRuyaKazmasi %player%
+  satissandigi:
+    - uci give satisSandigi %player%
+  demircigunlukgorev:
+    - eco give %player% 10000
+    - jobs grantxp %player% Demirci 1000
+  vipziplamasi:
+    - lp user %player% permission settemp unioperks.jump true 30d accumulate
+  vipgucu:
+    - lp user %player% permission settemp unioperks.strength true 30d accumulate
+  vipatesdirenci:
+    - lp user %player% permission settemp unioperks.fireresistence true 30d accumulate
+  vipdirenci:
+    - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+  simyagergunlukgorev:
+    - eco give %player% 25000
+    - jobs grantxp %player% Simyager 2500
+  buyucununduellokiti:
+    - lp user %player% permission set essentials.kits.BuyucununDuelloSeti
+  buyucununaletcantasi:
+    - lp user %player% permission set essentials.kits.BuyucununAletSeti
+  buyucugunlukgorev:
+    - eco give %player% 10000
+    - jobs grantxp %player% Büyücü 1000
+oneTimeQuests:
+  - madencininsavaskiti
+  - madencininaletkiti
+  - kedigozuozelligi
+  - enerjiicecegiozelligi
+  - ganimetkilici
+  - satisasasi
+  - pembepencebossu
+  - bossavcisikiti
+  - vipgucuvevipdirenci
+  - elislemesisavaskiti
+  - tamirhakki
+  - tamirasasi
+  - demircininruyakazmasi
+  - satissandigi
+  - vipziplamasi
+  - vipgucu
+  - vipatesdirenci
+  - vipdirenci
+  - buyucununduellokiti
+  - buyucununaletcantasi

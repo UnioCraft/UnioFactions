@@ -2,9 +2,11 @@ package me.uniodex.uniofactions.commands;
 
 import me.uniodex.uniofactions.UnioFactions;
 import me.uniodex.uniofactions.managers.VIPManager.VIPType;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CmdUniofactions implements CommandExecutor {
 
@@ -40,6 +42,36 @@ public class CmdUniofactions implements CommandExecutor {
 
                     plugin.getVipManager().giveVIPReward(target, type);
                     sender.sendMessage(plugin.getMessage("messages.vipRewardHasGiven"));
+                }
+            }
+
+            if (args[0].equalsIgnoreCase("jobreward")) {
+                if (sender.hasPermission("uniofactions.jobreward")) {
+                    String quest = args[1];
+                    String target = args[2];
+
+                    Player targetPlayer = Bukkit.getPlayer(target);
+                    if (targetPlayer == null) {
+                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardNoPlayer"));
+                        return true;
+                    }
+
+                    if (plugin.getQuestManager().isQuestExist(quest)) {
+                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardNoQuest"));
+                        return true;
+                    }
+
+                    if (plugin.getQuestManager().isQuestCompleted(target, quest)) {
+                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardOneTime"));
+                        return true;
+                    }
+
+                    if (plugin.getQuestManager().isOneTimeOnly(quest)) {
+                        plugin.getQuestManager().setQuestCompleted(target, quest);
+                    }
+
+                    plugin.getQuestManager().giveQuestRewards(target, quest);
+                    sender.sendMessage(plugin.getMessage("messages.commandJobRewardSuccess"));
                 }
             }
         }

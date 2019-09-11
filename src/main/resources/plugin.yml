@@ -4,7 +4,7 @@ author: 'UnioDex'
 version: 2.0
 
 depend: [Factions, WorldGuard, Vault]
-softdepend: [Citizens, MythicMobs, CombatLogX, PlaceholderAPI]
+softdepend: [Citizens, MythicMobs, CombatLogX, PlaceholderAPI, Jobs, UnioCustomItems]
 
 commands:
   tpchunk:
