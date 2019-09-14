@@ -67,10 +67,10 @@ public class JobsListeners implements Listener {
         Player player = event.getPlayer().getPlayer();
 
         if (player == null || event.getJob() == null) return;
+        if (!event.getJob().getName().equalsIgnoreCase("Madenci")) return;
 
         double amount = getPayment(player, event.getJob(), event.getAmount());
         event.setAmount(amount);
-        event.setPoints(amount);
     }
 
     @EventHandler(ignoreCancelled = true)
