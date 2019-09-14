@@ -56,7 +56,7 @@ public class CmdUniofactions implements CommandExecutor {
                         return true;
                     }
 
-                    if (plugin.getQuestManager().isQuestExist(quest)) {
+                    if (!plugin.getQuestManager().isQuestExist(quest)) {
                         sender.sendMessage(plugin.getMessage("messages.commandJobRewardNoQuest"));
                         return true;
                     }

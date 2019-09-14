@@ -66,6 +66,8 @@ public class JobsListeners implements Listener {
         if (event.getPlayer().getPlayer() == null) return;
         Player player = event.getPlayer().getPlayer();
 
+        if (player == null || event.getJob() == null) return;
+
         double amount = getPayment(player, event.getJob(), event.getAmount());
         event.setAmount(amount);
         event.setPoints(amount);
