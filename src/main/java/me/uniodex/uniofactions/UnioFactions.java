@@ -14,6 +14,7 @@ import me.uniodex.uniofactions.listeners.PlayerListeners;
 import me.uniodex.uniofactions.listeners.ProtectionListeners;
 import me.uniodex.uniofactions.managers.*;
 import me.uniodex.uniofactions.utils.Utils;
+import me.uniodex.uniofactions.utils.packages.menubuilder.inventory.InventoryListener;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -53,6 +54,8 @@ public class UnioFactions extends JavaPlugin {
     private CombatLogX combatLogX;
     @Getter
     private Permission permission;
+    @Getter
+    private InventoryListener inventoryListener;
 
     public void onEnable() {
         instance = this;
@@ -104,6 +107,7 @@ public class UnioFactions extends JavaPlugin {
         }
         new PlayerListeners(this);
         new ProtectionListeners(this);
+        inventoryListener = new InventoryListener(this);
 
         // Commands
         new CmdUniofactions(this);
@@ -111,7 +115,7 @@ public class UnioFactions extends JavaPlugin {
         new CmdChatcolor(this);
         new CmdCommands(this);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(this, () -> clearOldLogs(), 1L);
+        Bukkit.getScheduler().runTaskLaterAsynchronously(this, this::clearOldLogs, 1L);
     }
 
     public void onDisable() {
