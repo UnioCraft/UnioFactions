@@ -1,5 +1,7 @@
 package me.uniodex.uniofactions.managers;
 
+import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.container.JobsPlayer;
 import me.uniodex.uniofactions.UnioFactions;
 import me.uniodex.uniofactions.utils.Utils;
 import org.bukkit.Location;
@@ -45,5 +47,12 @@ public class JobsManager {
             }
         }
         return false;
+    }
+
+    public boolean isPlayerInJob(String player, String job) {
+        JobsPlayer jobsPlayer = Jobs.getPlayerManager().getJobsPlayer(player);
+        if (jobsPlayer == null) return false;
+        if (Jobs.getJob(job) == null) return false;
+        return jobsPlayer.isInJob(Jobs.getJob(job));
     }
 }

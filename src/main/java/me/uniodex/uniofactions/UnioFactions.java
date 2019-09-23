@@ -4,10 +4,7 @@ import com.SirBlobman.combatlogx.CombatLogX;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import lombok.Getter;
-import me.uniodex.uniofactions.commands.CmdChatcolor;
-import me.uniodex.uniofactions.commands.CmdCommands;
-import me.uniodex.uniofactions.commands.CmdTpchunk;
-import me.uniodex.uniofactions.commands.CmdUniofactions;
+import me.uniodex.uniofactions.commands.*;
 import me.uniodex.uniofactions.listeners.CitizensListeners;
 import me.uniodex.uniofactions.listeners.JobsListeners;
 import me.uniodex.uniofactions.listeners.PlayerListeners;
@@ -22,7 +19,9 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 public class UnioFactions extends JavaPlugin {
@@ -48,6 +47,8 @@ public class UnioFactions extends JavaPlugin {
     private JobsManager jobsManager;
     @Getter
     private QuestManager questManager;
+    @Getter
+    private MenuManager menuManager;
     @Getter
     private static UnioFactions instance;
     @Getter
@@ -95,6 +96,7 @@ public class UnioFactions extends JavaPlugin {
         chatColorManager = new ChatColorManager(this);
         vipManager = new VIPManager((this));
         questManager = new QuestManager((this));
+        menuManager = new MenuManager(this);
 
         if (Bukkit.getPluginManager().isPluginEnabled("Jobs")) {
             jobsManager = new JobsManager((this));
@@ -114,6 +116,7 @@ public class UnioFactions extends JavaPlugin {
         new CmdTpchunk(this);
         new CmdChatcolor(this);
         new CmdCommands(this);
+        new CmdQuests(this);
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(this, this::clearOldLogs, 1L);
     }
@@ -131,6 +134,15 @@ public class UnioFactions extends JavaPlugin {
     public String getMessage(String configSection) {
         if (getConfig().getString(configSection) == null) return null;
         return ChatColor.translateAlternateColorCodes('&', getConfig().getString(configSection).replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix));
+    }
+
+    public List<String> getMessages(String configSection) {
+        if (getConfig().getStringList(configSection) == null) return null;
+        List<String> newList = new ArrayList<>();
+        for (String msg : getConfig().getStringList(configSection)) {
+            newList.add(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix)));
+        }
+        return newList;
     }
 
     private void clearOldLogs() {

@@ -7,6 +7,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.uniodex.uniofactions.UnioFactions;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,5 +83,29 @@ public class Utils {
         }
 
         return regionIds.contains(area);
+    }
+
+    public static ItemStack stringToItemStack(String item) {
+        String type;
+        short data;
+        if (item.contains(":")) {
+            type = item.split(":")[0];
+            data = Short.valueOf(item.split(":")[1]);
+        } else {
+            type = item;
+            data = 0;
+        }
+        return new ItemStack(Material.valueOf(type), 1, data);
+    }
+
+    public static int countOccurences(String str, String word) {
+        String[] a = str.split(" ");
+        int count = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i].contains(word))
+                count++;
+        }
+
+        return count;
     }
 }

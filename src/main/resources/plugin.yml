@@ -17,3 +17,6 @@ commands:
   commands:
     description: commands
     aliases: [komutlar]
+  quests:
+    description: quests
+    aliases: [görevler, gorevler]

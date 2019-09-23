@@ -28,6 +28,44 @@ public class CmdUniofactions implements CommandExecutor {
                     sender.sendMessage(plugin.getMessage("messages.noPermission"));
                 }
             }
+        } else if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("getrewards")) {
+                String quest = args[1];
+
+                if (!(sender instanceof Player)) {
+                    return true;
+                }
+
+                Player targetPlayer = (Player) sender;
+                if (targetPlayer == null) {
+                    sender.sendMessage(plugin.getMessage("messages.playerIsNotOnline"));
+                    return true;
+                }
+
+                if (!plugin.getQuestManager().isQuestExist(quest)) {
+                    sender.sendMessage(plugin.getMessage("messages.questNotExist"));
+                    return true;
+                }
+
+                if (!plugin.getQuestManager().isQuestCompleted(targetPlayer.getName(), quest)) {
+                    sender.sendMessage(plugin.getMessage("messages.questIsNotCompleted"));
+                    return true;
+                }
+
+                if (plugin.getQuestManager().isQuestRewarded(targetPlayer.getName(), quest)) {
+                    sender.sendMessage(plugin.getMessage("messages.questAlreadyCompleted"));
+                    return true;
+                }
+
+                plugin.getQuestManager().giveQuestRewards(targetPlayer.getName(), quest);
+
+                if (!plugin.getQuestManager().isOneTimeOnly(quest)) {
+                    plugin.getQuestManager().setQuestNotCompleted(targetPlayer.getName(), quest);
+                } else {
+                    plugin.getQuestManager().setQuestRewarded(targetPlayer.getName(), quest);
+                }
+                sender.sendMessage(plugin.getMessage("quests." + quest + ".successMessage"));
+            }
         } else if (args.length == 3) {
             if (args[0].equalsIgnoreCase("vipreward")) {
                 if (sender.hasPermission("uniofactions.vipreward")) {
@@ -45,33 +83,29 @@ public class CmdUniofactions implements CommandExecutor {
                 }
             }
 
-            if (args[0].equalsIgnoreCase("jobreward")) {
-                if (sender.hasPermission("uniofactions.jobreward")) {
+            if (args[0].equalsIgnoreCase("completequest")) {
+                if (sender.hasPermission("uniofactions.completequest")) {
                     String quest = args[1];
                     String target = args[2];
 
                     Player targetPlayer = Bukkit.getPlayer(target);
                     if (targetPlayer == null) {
-                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardNoPlayer"));
+                        sender.sendMessage(plugin.getMessage("messages.playerIsNotOnline"));
                         return true;
                     }
 
                     if (!plugin.getQuestManager().isQuestExist(quest)) {
-                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardNoQuest"));
+                        sender.sendMessage(plugin.getMessage("messages.questNotExist"));
                         return true;
                     }
 
                     if (plugin.getQuestManager().isQuestCompleted(target, quest)) {
-                        sender.sendMessage(plugin.getMessage("messages.commandJobRewardOneTime"));
+                        sender.sendMessage(plugin.getMessage("messages.questAlreadyCompleted"));
                         return true;
                     }
 
-                    if (plugin.getQuestManager().isOneTimeOnly(quest)) {
-                        plugin.getQuestManager().setQuestCompleted(target, quest);
-                    }
-
-                    plugin.getQuestManager().giveQuestRewards(target, quest);
-                    sender.sendMessage(plugin.getMessage("messages.commandJobRewardSuccess"));
+                    plugin.getQuestManager().setQuestCompleted(target, quest);
+                    sender.sendMessage(plugin.getMessage("messages.commandCompleteQuestSuccess"));
                 }
             }
         }

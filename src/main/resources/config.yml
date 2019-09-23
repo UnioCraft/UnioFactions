@@ -32,10 +32,33 @@ messages:
     &aGüç: &b%factionsuuid_player_power%
   invalidVIPType: "%hataprefix%Hatalı bir VIP türü girdiniz."
   vipRewardHasGiven: "%bilgiprefix%VIP ödülü başarıyla verildi."
-  commandJobRewardNoPlayer: "%hataprefix%Belirttiğiniz oyuncu oyunda değil."
-  commandJobRewardNoQuest: "%hataprefix%Belirttiğiniz görev mevcut değil."
-  commandJobRewardOneTime: "%hataprefix%Bu görevden sadece bir kez ödül alabilirsiniz."
-  commandJobRewardSuccess: "%bilgiprefix%Görev ödüllerini başarıyla aldınız!"
+  playerIsNotOnline: "%hataprefix%Belirttiğiniz oyuncu oyunda değil."
+  questNotExist: "%hataprefix%Belirttiğiniz görev mevcut değil."
+  questAlreadyCompleted: "%hataprefix%Bu görevi daha önce tamamlamışsınız."
+  commandCompleteQuestSuccess: "%bilgiprefix%Görev başarıyla tamamlandı!"
+  questIsNotCompleted: "%hataprefix%Görev tamamlanamadı. Öncelikle görev şartlarını yerine getirmelisiniz."
+  questsGUIitle: "&0Görevler"
+  questIsDaily: "Günlük Görev"
+  questIsOneTimeOnly: "Tek Seferlik Görev"
+  questClickToComplete: "&aGörevi tamamlamak için tıkla!"
+  questIsNotCompletedGui: "&c&lGÖREV TAMAMLANMADI"
+  questYouMustBeInJob: |
+    &cBu görevi yapabilmek için
+    &c%job% mesleğinde olmalısınız!
+  questIsCompleted: "&a&lGÖREV TAMAMLANDI"
+  questRemainingTimeToReset: |
+    &6&lGörevin Sıfırlanmasına Kalan Süre:
+    &7%remainingTime%
+  questMenuLore: |
+    &7%questType%
+
+    &6&lGörev Şartları:
+    %questObjectives%
+
+    &6&lGörev Ödülleri:
+    %questRewards%
+
+    %questAction%
 commandInstances:
   "iteminfo": "itemdb"
   "elsat": "sell hand"
@@ -55,98 +78,492 @@ mineNames: #TODO
   vip: "vipmaden"
   uvip: "uvipmaden"
   uvip+: "uvip+maden"
-questRewards:
+quests:
   madencininsavaskiti:
-    - lp user %player% permission set essentials.kits.MadencininSavasKiti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.MadencininSavasKiti
+    daily: false
+    job: Madenci
+    neededInventorySlots: 0
+    menuDisplayName: "Madencinin Savaş Kiti"
+    successMessage: "&6Tebrikler! &cMadencinin Savaş Kiti &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Blok Kır:"
+      - "&7- Lapis Cevheri &d(%completed1%/7500)"
+    rewards:
+      - "&7- Madencinin Savaş Kiti &6(/kit)"
+    guiItem: DIAMOND_ORE
   madencininaletkiti:
-    - lp user %player% permission set essentials.kits.MadencininAletKiti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.MadencininAletKiti
+    daily: false
+    job: Madenci
+    neededInventorySlots: 0
+    menuDisplayName: "Madencinin Alet Kiti"
+    successMessage: "&6Tebrikler! &cMadencinin Alet Kiti &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Blok Kır:"
+      - "&7- Taş &d(%completed1%/5000)"
+    rewards:
+      - "&7- Madencinin Alet Kiti &6(/kit)"
+    guiItem: DIAMOND_ORE
   madencigunlukgorev:
-    - eco give %player% 150000
-    - jobs grantxp %player% Madenci 5000
+    rewardCommands:
+      - eco give %player% 150000
+      - jobs grantxp %player% Madenci 5000
+    daily: true
+    job: Madenci
+    neededInventorySlots: 0
+    menuDisplayName: "Madenci Günlük Görev"
+    successMessage: "&6Tebrikler! Madenci günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Blok Kır:"
+      - "&7- Lapis Cevheri &d(%completed1%/500)"
+      - "&7- Taş &d(%completed2%/500)"
+      - "&7- Elmas Cevheri &d(%completed3%/500)"
+    rewards:
+      - "&7- 150.000 TL Para"
+      - "&7- 5000 Meslek XP'si"
+    guiItem: DIAMOND_ORE
   kedigozuozelligi:
-    - lp user %player% permission set uci.catvision
+    rewardCommands:
+      - lp user %player% permission set uci.catvision
+    daily: false
+    job: İnşaatçı
+    neededInventorySlots: 0
+    menuDisplayName: "Kedi Gözü Özelliği"
+    successMessage: "&6Tebrikler! &cKedi Gözü Özelliği &6görevini başarıyla tamamladınız! &c/kedigözü &6komutunu kullanarak gece görüşü özelliğni açıp kapatabilirsiniz!"
+    objectives:
+      - "&7Blok Koy:"
+      - "&7- Her Tür Renkli Camdan 100 Adet &d(%completedall%/1600)"
+    rewards:
+      - "&7- Kedi Gözü Özelliği &6(Sınırsız Gece Görüşü)"
+    guiItem: BRICK
   enerjiicecegiozelligi:
-    - lp user %player% permission set uci.energydrink
+    rewardCommands:
+      - lp user %player% permission set uci.energydrink
+    daily: false
+    job: İnşaatçı
+    neededInventorySlots: 0
+    menuDisplayName: "Enerji İçeceği Özelliği"
+    successMessage: "&6Tebrikler! &cEnerji İçeceği Özelliği &6görevini başarıyla tamamladınız! &c/enerjiiçeceği &6komutunu kullanarak hızlı kazma özelliğni açıp kapatabilirsiniz!"
+    objectives:
+      - "&7Blok Koy:"
+      - "&7- Her Tür Renkli Kilden (Terakota) 200 Adet &d(%completedall%/3200)"
+    rewards:
+      - "&7- Enerji İçeceği Özelliği &6(Hızlı Kazma)"
+    guiItem: BRICK
   insaatcigunlukgorev:
-    - eco give %player% 10000
-    - jobs grantxp %player% İnşaatçı 1000
+    rewardCommands:
+      - eco give %player% 10000
+      - jobs grantxp %player% İnşaatçı 1000
+    daily: true
+    job: İnşaatçı
+    neededInventorySlots: 0
+    menuDisplayName: "İnşaatçı Günlük Görev"
+    successMessage: "&6Tebrikler! İnşaatçı günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Blok Koy:"
+      - "&7- Her Renk Yünden 20 Adet &d(%completedall%/320)"
+    rewards:
+      - "&7- 10.000 TL Para"
+      - "&7- 1000 Meslek XP'si"
+    guiItem: BRICK
   ganimetkilici:
-    - uci give ganimetKilici %player%
+    rewardCommands:
+      - uci give ganimetKilici %player%
+    daily: false
+    job: Çiftçi
+    neededInventorySlots: 1
+    menuDisplayName: "Ganimet Kılıcı"
+    successMessage: "&6Tebrikler! &cGanimet Kılıcı &6görevini başarıyla tamamladınız! &cGanimet Kılıcı &6envanterinize eklendi!"
+    objectives:
+      - "&7Hayvan Çiftleştir:"
+      - "&7- İnek &d(%completed1%/250)"
+      - "&7- Domuz &d(%completed2%/250)"
+      - "&7- Koyun &d(%completed3%/250)"
+      - "&7- Tavuk &d(%completed4%/250)"
+    rewards:
+      - "&7- Özel Ganimet Kılıcı"
+    guiItem: GOLD_HOE
   satisasasi:
-    - uci give satisAsasi %player%
+    rewardCommands:
+      - uci give satisAsasi %player%
+    daily: false
+    job: Çiftçi
+    neededInventorySlots: 1
+    menuDisplayName: "Satış Asası"
+    successMessage: "&6Tebrikler! &cSatış Asası &6görevini başarıyla tamamladınız! &cSatış Asası &6envanterinize eklendi!"
+    objectives:
+      - "&7Blok Koy:"
+      - "&7- Kaktüs &d(%completed1%/500)"
+      - " "
+      - "&7Blok Kır:"
+      - "&7- Kaktüs &d(%completed2%/1000)"
+    rewards:
+      - "&7- Satış Asası"
+    guiItem: GOLD_HOE
   ciftcigunlukgorev:
-    - eco give %player% 10000
-    - jobs grantxp %player% Çiftçi 1000
+    rewardCommands:
+      - eco give %player% 10000
+      - jobs grantxp %player% Çiftçi 1000
+    daily: true
+    job: Çiftçi
+    neededInventorySlots: 0
+    menuDisplayName: "Çiftçi Günlük Görev"
+    successMessage: "&6Tebrikler! Çiftçi günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Blok Koy:"
+      - "&7- Balkabağı Tohumu &d(%completed1%/25)"
+      - " "
+      - "&7Blok Kır:"
+      - "&7- Balkabağı &d(%completed2%/25)"
+    rewards:
+      - "&7- 10.000 TL Para"
+      - "&7- 1000 Meslek XP'si"
+    guiItem: GOLD_HOE
   pembepencebossu:
-    - uci give pembepenceYumurta %player%
+    rewardCommands:
+      - uci give pembepenceYumurta %player%
+    daily: false
+    job: Avcı
+    neededInventorySlots: 1
+    menuDisplayName: "Pempepençe Bossu"
+    successMessage: "&6Tebrikler! &cPembepençe Bossu &6görevini başarıyla tamamladınız! &cPembepençe Boss Yumurtası &6envanterinize eklendi!"
+    objectives:
+      - "&7Yaratık Öldür:"
+      - "&7- İskelet &d(%completed1%/250)"
+      - "&7- Zombi &d(%completed2%/250)"
+      - "&7- Creeper &d(%completed3%/250)"
+      - "&7- Örümcek &d(%completed4%/250)"
+    rewards:
+      - "&7- Pembepençe Boss Yumurtası"
+    guiItem: ROTTEN_FLESH
   avcigunlukgorev:
-    - eco give %player% 50000
-    - jobs grantxp %player% Avcı 2500
-    - give %player% 383:100 1
-    - give %player% 383:90 1
+    rewardCommands:
+      - eco give %player% 50000
+      - jobs grantxp %player% Avcı 2500
+      - give %player% 383:100 1
+      - give %player% 383:90 1
+    daily: true
+    job: Avcı
+    neededInventorySlots: 2
+    menuDisplayName: "Avcı Günlük Görev"
+    successMessage: "&6Tebrikler! Avcı günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Yaratık Öldür:"
+      - "&7- İskelet &d(%completed1%/25)"
+      - "&7- Zombi &d(%completed2%/25)"
+      - "&7- Creeper &d(%completed3%/25)"
+      - "&7- Örümcek &d(%completed4%/25)"
+    rewards:
+      - "&7- 50.000 TL Para"
+      - "&7- 2500 Meslek XP'si"
+      - "&7- 1 At Yumurtası"
+      - "&7- 1 Domuz Yumurtası"
+    guiItem: ROTTEN_FLESH
   bossavcisikiti:
-    - lp user %player% permission set essentials.kits.BossAvcisiKiti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.BossAvcisiKiti
+    daily: false
+    job: Boss_Avcısı
+    neededInventorySlots: 0
+    menuDisplayName: "Boss Avcısı Kiti"
+    successMessage: "&6Tebrikler! &cBoss Avcısı Kiti &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Boss Öldür:"
+      - "&7- Sıska Şövalye &d(%completed1%/50)"
+      - "&7- Pembepençe &d(%completed2%/3)"
+    rewards:
+      - "&7- Boss Avcısı Kiti &6(/kit)"
+    guiItem: 'SKULL_ITEM:2'
   bossavcisigunlukgorev:
-    - eco give %player% 100000
-    - jobs grantxp %player% Boss_Avcısı 5000
+    rewardCommands:
+      - eco give %player% 100000
+      - jobs grantxp %player% Boss_Avcısı 5000
+    daily: true
+    job: Boss_Avcısı
+    neededInventorySlots: 0
+    menuDisplayName: "Boss Avcısı Günlük Görev"
+    successMessage: "&6Tebrikler! Boss Avcısı günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Boss Öldür:"
+      - "&7- Sıska Şövalye &d(%completed1%/3)"
+    rewards:
+      - "&7- 100.000 TL Para"
+      - "&7- 5000 Meslek XP'si"
+    guiItem: 'SKULL_ITEM:2'
   vipgucuvevipdirenci:
-    - lp user %player% permission settemp unioperks.strength true 30d accumulate
-    - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+    rewardCommands:
+      - lp user %player% permission settemp unioperks.strength true 30d accumulate
+      - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+    daily: false
+    job: Kelle_Avcısı
+    neededInventorySlots: 0
+    menuDisplayName: "VIP Gücü ve VIP Direnci"
+    successMessage: "&6Tebrikler! &cVIP Gücü ve VIP Direnci &6görevini başarıyla tamamladınız! 1 ay boyunca &c/vipgucu &6ve &c/vipdirenci &6komutlarıyla yeni özelliklerinizi kullanabilirsiniz!"
+    objectives:
+      - "&7- Oyuncu Öldür &d(%completed1%/100)"
+    rewards:
+      - "&7- VIP Gücü Özelliği (1 aylık)"
+      - "&7- VIP Direnci Özelliği (1 aylık)"
+    guiItem: 'SKULL_ITEM:3'
   kelleavcisigunlukgorev:
-    - eco give %player% 25000
-    - jobs grantxp %player% Kelle_Avcısı 2500
+    rewardCommands:
+      - eco give %player% 25000
+      - jobs grantxp %player% Kelle_Avcısı 2500
+    daily: true
+    job: Kelle_Avcısı
+    neededInventorySlots: 0
+    menuDisplayName: "Kelle Avcısı Günlük Görev"
+    successMessage: "&6Tebrikler! Kelle Avcısı günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7- Oyuncu Öldür &d(%completed1%/5)"
+    rewards:
+      - "&7- 25.000 TL Para"
+      - "&7- 2500 Meslek XP'si"
+    guiItem: 'SKULL_ITEM:3'
   elislemesisavaskiti:
-    - lp user %player% permission set essentials.kits.ElIslemesiSavasKiti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.ElIslemesiSavasKiti
+    daily: false
+    job: Zanaatkar
+    neededInventorySlots: 0
+    menuDisplayName: "El İşlemesi Savaş Kiti"
+    successMessage: "&6Tebrikler! &cEl İşlemesi Savaş Kiti &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Elmas Blok &d(%completed1%/250)"
+      - "&7- Zümrüt Blok &d(%completed2%/250)"
+      - "&7- Altın Blok &d(%completed3%/250)"
+      - "&7- Demir Blok &d(%completed4%/250)"
+    rewards:
+      - "&7- El İşlemesi Savaş Kiti &6(/kit)"
+    guiItem: STICK
   tamirhakki:
-    - lp user %player% permission set essentials.repair
+    rewardCommands:
+      - lp user %player% permission set essentials.repair
+    daily: false
+    job: Zanaatkar
+    neededInventorySlots: 0
+    menuDisplayName: "Tamir Hakkı"
+    successMessage: "&6Tebrikler! &cTamir Hakkı &6görevini başarıyla tamamladınız! &c/repair &6komutunu kullanarak eşyalarınızı tamir edebilirsiniz!"
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Çubuk &d(%completed1%/256)"
+      - "&7- Kağıt &d(%completed2%/256)"
+      - "&7- Tabela &d(%completed3%/256)"
+      - "&7- Meşale &d(%completed4%/128)"
+    rewards:
+      - "&7- Sınırsız Tamir Hakkı &6(/repair)"
+    guiItem: STICK
   zanaatkargunlukgorev:
-    - eco give %player% 5000
-    - jobs grantxp %player% Zanaatkar 500
+    rewardCommands:
+      - eco give %player% 5000
+      - jobs grantxp %player% Zanaatkar 500
+    daily: true
+    job: Zanaatkar
+    neededInventorySlots: 0
+    menuDisplayName: "Zanaatkar Günlük Görev"
+    successMessage: "&6Tebrikler! Zanaatkar günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Çubuk &d(%completed1%/256)"
+    rewards:
+      - "&7- 5.000 TL Para"
+      - "&7- 500 Meslek XP'si"
+    guiItem: STICK
   tamirasasi:
-    - uci give tamirAsasi %player%
+    rewardCommands:
+      - uci give tamirAsasi %player%
+    daily: false
+    job: Demirci
+    neededInventorySlots: 1
+    menuDisplayName: "Tamir Asası"
+    successMessage: "&6Tebrikler! &cTamir Asası &6görevini başarıyla tamamladınız! Eşya envanterinize eklendi!"
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Elmas Kask &d(%completed1%/100)"
+      - "&7- Elmas Zırh &d(%completed2%/100)"
+      - "&7- Elmas Pantolon &d(%completed3%/100)"
+      - "&7- Elmas Ayakkabı &d(%completed4%/100)"
+      - "&7- Elmas Kılıç &d(%completed5%/100)"
+    rewards:
+      - "&7- Tamir Asası"
+    guiItem: ANVIL
   demircininruyakazmasi:
-    - uci give demircininRuyaKazmasi %player%
+    rewardCommands:
+      - uci give demircininRuyaKazmasi %player%
+    daily: false
+    job: Demirci
+    neededInventorySlots: 1
+    menuDisplayName: "Demircinin Rüya Kazması"
+    successMessage: "&6Tebrikler! &cDemircinin Rüya Kazması &6görevini başarıyla tamamladınız! Eşya envanterinize eklendi!"
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Elmas Balta &d(%completed1%/100)"
+      - "&7- Elmas Kazma &d(%completed2%/100)"
+      - "&7- Elmas Kürek &d(%completed3%/100)"
+    rewards:
+      - "&7- Demircinin Rüya Kazması"
+    guiItem: ANVIL
   satissandigi:
-    - uci give satisSandigi %player%
+    rewardCommands:
+      - uci give satisSandigi %player%
+    daily: false
+    job: Demirci
+    neededInventorySlots: 1
+    menuDisplayName: "Satış Sandığı"
+    successMessage: "&6Tebrikler! &cSatış Sandığı &6görevini başarıyla tamamladınız! Eşya envanterinize eklendi!"
+    objectives:
+      - "&7Tamir Et:"
+      - "&7- Elmas Kask &d(%completed1%/50)"
+      - "&7- Elmas Zırh &d(%completed2%/50)"
+      - "&7- Elmas Pantolon &d(%completed3%/50)"
+      - "&7- Elmas Ayakkabı &d(%completed4%/50)"
+      - "&7- Elmas Kılıç &d(%completed5%/50)"
+    rewards:
+      - "&7- Satış Sandığı"
+    guiItem: ANVIL
   demircigunlukgorev:
-    - eco give %player% 10000
-    - jobs grantxp %player% Demirci 1000
+    rewardCommands:
+      - eco give %player% 10000
+      - jobs grantxp %player% Demirci 1000
+    daily: true
+    job: Demirci
+    neededInventorySlots: 0
+    menuDisplayName: "Demirci Günlük Görev"
+    successMessage: "&6Tebrikler! Demirci günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Eşya Üret:"
+      - "&7- Elmas Kask &d(%completed1%/5)"
+      - "&7- Elmas Zırh &d(%completed2%/5)"
+      - "&7- Elmas Pantolon &d(%completed3%/5)"
+      - "&7- Elmas Ayakkabı &d(%completed4%/5)"
+      - "&7- Elmas Kılıç &d(%completed5%/5)"
+    rewards:
+      - "&7- 10.000 TL Para"
+      - "&7- 1000 Meslek XP'si"
+    guiItem: ANVIL
   vipziplamasi:
-    - lp user %player% permission settemp unioperks.jump true 30d accumulate
+    rewardCommands:
+      - lp user %player% permission settemp unioperks.jump true 30d accumulate
+    daily: false
+    job: Simyager
+    neededInventorySlots: 0
+    menuDisplayName: "VIP Zıplaması"
+    successMessage: "&6Tebrikler! &cVIP Zıplaması &6görevini başarıyla tamamladınız! &c/vipziplamasi &6komutuyla özelliği kullanabilirsiniz!"
+    objectives:
+      - "&7İksir Malzemesi Demle:"
+      - "&7- Nether Wart &d(%completed1%/200)"
+    rewards:
+      - "&7- VIP Zıplaması Özelliği (1 aylık)"
+    guiItem: BREWING_STAND_ITEM
   vipgucu:
-    - lp user %player% permission settemp unioperks.strength true 30d accumulate
+    rewardCommands:
+      - lp user %player% permission settemp unioperks.strength true 30d accumulate
+    daily: false
+    job: Simyager
+    neededInventorySlots: 0
+    menuDisplayName: "VIP Gücü"
+    successMessage: "&6Tebrikler! &cVIP Gücü &6görevini başarıyla tamamladınız! &c/vipgucu &6komutuyla özelliği kullanabilirsiniz!"
+    objectives:
+      - "&7İksir Malzemesi Demle:"
+      - "&7- Alaz (Blaze) Tozu &d(%completed1%/200)"
+    rewards:
+      - "&7- VIP Gücü Özelliği (1 aylık)"
+    guiItem: BREWING_STAND_ITEM
   vipatesdirenci:
-    - lp user %player% permission settemp unioperks.fireresistence true 30d accumulate
+    rewardCommands:
+      - lp user %player% permission settemp unioperks.fireresistence true 30d accumulate
+    daily: false
+    job: Simyager
+    neededInventorySlots: 0
+    menuDisplayName: "VIP Ateş Direnci"
+    successMessage: "&6Tebrikler! &cVIP Ateş Direnci &6görevini başarıyla tamamladınız! &c/vipatesdirenci &6komutuyla özelliği kullanabilirsiniz!"
+    objectives:
+      - "&7İksir Malzemesi Demle:"
+      - "&7- Magma Kremi &d(%completed1%/200)"
+    rewards:
+      - "&7- VIP Ateş Direnci Özelliği (1 aylık)"
+    guiItem: BREWING_STAND_ITEM
   vipdirenci:
-    - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+    rewardCommands:
+      - lp user %player% permission settemp unioperks.resistence true 30d accumulate
+    daily: false
+    job: Simyager
+    neededInventorySlots: 0
+    menuDisplayName: "VIP Direnci"
+    successMessage: "&6Tebrikler! &cVIP Direnci &6görevini başarıyla tamamladınız! &c/vipdirenci &6komutuyla özelliği kullanabilirsiniz!"
+    objectives:
+      - "&7İksir Malzemesi Demle:"
+      - "&7- Parlayan Karpuz &d(%completed1%/200)"
+    rewards:
+      - "&7- VIP Direnci Özelliği (1 aylık)"
+    guiItem: BREWING_STAND_ITEM
   simyagergunlukgorev:
-    - eco give %player% 25000
-    - jobs grantxp %player% Simyager 2500
+    rewardCommands:
+      - eco give %player% 25000
+      - jobs grantxp %player% Simyager 2500
+    daily: true
+    job: Simyager
+    neededInventorySlots: 0
+    menuDisplayName: "Simyager Günlük Görev"
+    successMessage: "&6Tebrikler! Simyager günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7İksir Malzemesi Demle:"
+      - "&7- Nether Wart &d(%completed1%/10)"
+      - "&7- Alaz (Blaze) Tozu &d(%completed2%/10)"
+      - "&7- Magma Kremi &d(%completed3%/10)"
+      - "&7- Parlayan Karpuz &d(%completed4%/10)"
+    rewards:
+      - "&7- 25.000 TL Para"
+      - "&7- 2500 Meslek XP'si"
+    guiItem: BREWING_STAND_ITEM
   buyucununduellokiti:
-    - lp user %player% permission set essentials.kits.BuyucununDuelloSeti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.BuyucununDuelloSeti
+    daily: false
+    job: Büyücü
+    neededInventorySlots: 0
+    menuDisplayName: "Büyücünün Düello Kiti"
+    successMessage: "&6Tebrikler! &cBüyücünün Düello Kiti &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Eşya Büyüle:"
+      - "&7- Koruma 4 &d(%completed1%/100)"
+    rewards:
+      - "&7- Büyücünün Düello Seti"
+    guiItem: ENCHANTMENT_TABLE
   buyucununaletcantasi:
-    - lp user %player% permission set essentials.kits.BuyucununAletSeti
+    rewardCommands:
+      - lp user %player% permission set essentials.kits.BuyucununAletSeti
+    daily: false
+    job: Büyücü
+    neededInventorySlots: 0
+    menuDisplayName: "Büyücünün Alet Çantası"
+    successMessage: "&6Tebrikler! &cBüyücünün Alet Çantası &6görevini başarıyla tamamladınız! &c/kit &6komutunu kullanarak yeni kitinizi alabilirsiniz!"
+    objectives:
+      - "&7Eşya Büyüle:"
+      - "&7- Verimlilik 5 &d(%completed1%/50)"
+    rewards:
+      - "&7- Büyücünün Alet Çantası"
+    guiItem: ENCHANTMENT_TABLE
   buyucugunlukgorev:
-    - eco give %player% 10000
-    - jobs grantxp %player% Büyücü 1000
-oneTimeQuests:
-  - madencininsavaskiti
-  - madencininaletkiti
-  - kedigozuozelligi
-  - enerjiicecegiozelligi
-  - ganimetkilici
-  - satisasasi
-  - pembepencebossu
-  - bossavcisikiti
-  - vipgucuvevipdirenci
-  - elislemesisavaskiti
-  - tamirhakki
-  - tamirasasi
-  - demircininruyakazmasi
-  - satissandigi
-  - vipziplamasi
-  - vipgucu
-  - vipatesdirenci
-  - vipdirenci
-  - buyucununduellokiti
-  - buyucununaletcantasi
+    rewardCommands:
+      - eco give %player% 10000
+      - jobs grantxp %player% Büyücü 1000
+    daily: true
+    job: Büyücü
+    neededInventorySlots: 0
+    menuDisplayName: "Büyücü Günlük Görev"
+    successMessage: "&6Tebrikler! Büyücü günlük görevini başarıyla tamamladınız! Ödülleriniz hesabınıza eklendi."
+    objectives:
+      - "&7Eşya Büyüle:"
+      - "&7- Elmas Kask &d(%completed1%/3)"
+      - "&7- Elmas Zırh &d(%completed2%/3)"
+      - "&7- Elmas Pantolon &d(%completed3%/3)"
+      - "&7- Elmas Ayakkabı &d(%completed4%/3)"
+    rewards:
+      - "&7- 10.000 TL Para"
+      - "&7- 1000 Meslek XP'si"
+    guiItem: ENCHANTMENT_TABLE
