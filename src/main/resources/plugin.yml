@@ -20,3 +20,6 @@ commands:
   quests:
     description: quests
     aliases: [görevler, gorevler]
+  meslek: #jobs
+    description: meslek
+    aliases: [meslekler]

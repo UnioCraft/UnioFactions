@@ -74,6 +74,6 @@ public class ConfigManager {
     }
 
     public enum Config {
-        CHATCOLOR, COMPLETEDQUESTS, REWARDEDQUESTS
+        CHATCOLOR, COMPLETEDQUESTS, REWARDEDQUESTS, LANG
     }
 }

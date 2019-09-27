@@ -1,64 +1,3 @@
-messages:
-  unknownCommand: "%hataprefix%Hatalı bir komut girdiniz! Komutların listesi için &b/komutlar &cyazınız."
-  disallowedName: "Güvenlik gerekçesiyle bu isimle giriş yapmak yasaktır."
-  configReloaded: "%bilgiprefix%Yapılandırma yenilendi!"
-  noPermission: "%hataprefix%Bunun için izniniz yok!"
-  commandChatColorUsage: |
-    &a--- Kullanabileceğiniz Renkler ---
-    &f&l• &aYeşil, &bAçık_Mavi, &cAçık_Kırmızı, &dEflatun,
-    &f&l• &eSarı, &fBeyaz, &0Siyah, &1Koyu_Mavi,
-    &f&l• &2Koyu_Yeşil, &3Turkuaz, &4Koyu_Kırmızı, &5Koyu_Mor,
-    &f&l• &6Turuncu, &7Gri, &8Koyu_Gri, &9Mavi
-    &aÖrnek Kullanım: &b/renk Açık_Mavi
-  commandChatColorWrongColor: "%hataprefix%Hatalı bir renk adı girdiniz!"
-  commandChatColorSuccess: "%bilgiprefix%Konuşma renginiz %s olarak değiştirildi!"
-  commandCommandsHeader: '&e--------------- &rKomutlar: sayfa %page%/%maxpage% &e---------------'
-  commandCommandsNextPage: '&eBir sonraki sayfaya geçmek için &b/komutlar %page% &ekomutunu kullanın.'
-  commandCommandsContent: # TODO
-    - '&6/auction: &rAçık arttırma sisteminin ana komutudur.'
-    - '&6/back: &rIşınlanmadan ya da ölmeden önceki konumunuza döndürür. (VIP ve UVIP)'
-    - '&6/balance: &rPara miktarınızı gösterir.'
-    - '&6/bid: &rAçık arttırmaya belirttiğiniz teklifi verir.'
-    - '&6/challenges: &rSkyblock görevlerini gösterir.'
-    - '&6/clearinventory: &rEnvanterinizi sıfırlar.'
-    - '&6/ct: &rBir savaştaysanız kalan süreyi gösterir.'
-    - '&6/duyuru: &rAda warpı reklamı gibi duyurularınızı yapabileceğiniz komut.'
-  webInCombatDisabled: "%hataprefix%Savaş esnasında örümcek ağı koyamazsınız!"
-  chatHover: |
-    &aGönderme Zamanı: &b%time%
-    &aPara: &b%vault_eco_balance_formatted%
-    &a
-    &aÖldürme/Ölme Oranı: &b%uniostats_kdr%
-    &aGüç: &b%factionsuuid_player_power%
-  invalidVIPType: "%hataprefix%Hatalı bir VIP türü girdiniz."
-  vipRewardHasGiven: "%bilgiprefix%VIP ödülü başarıyla verildi."
-  playerIsNotOnline: "%hataprefix%Belirttiğiniz oyuncu oyunda değil."
-  questNotExist: "%hataprefix%Belirttiğiniz görev mevcut değil."
-  questAlreadyCompleted: "%hataprefix%Bu görevi daha önce tamamlamışsınız."
-  commandCompleteQuestSuccess: "%bilgiprefix%Görev başarıyla tamamlandı!"
-  questIsNotCompleted: "%hataprefix%Görev tamamlanamadı. Öncelikle görev şartlarını yerine getirmelisiniz."
-  questsGUIitle: "&0Görevler"
-  questIsDaily: "Günlük Görev"
-  questIsOneTimeOnly: "Tek Seferlik Görev"
-  questClickToComplete: "&aGörevi tamamlamak için tıkla!"
-  questIsNotCompletedGui: "&c&lGÖREV TAMAMLANMADI"
-  questYouMustBeInJob: |
-    &cBu görevi yapabilmek için
-    &c%job% mesleğinde olmalısınız!
-  questIsCompleted: "&a&lGÖREV TAMAMLANDI"
-  questRemainingTimeToReset: |
-    &6&lGörevin Sıfırlanmasına Kalan Süre:
-    &7%remainingTime%
-  questMenuLore: |
-    &7%questType%
-
-    &6&lGörev Şartları:
-    %questObjectives%
-
-    &6&lGörev Ödülleri:
-    %questRewards%
-
-    %questAction%
 commandInstances:
   "iteminfo": "itemdb"
   "elsat": "sell hand"
@@ -566,4 +505,70 @@ quests:
     rewards:
       - "&7- 10.000 TL Para"
       - "&7- 1000 Meslek XP'si"
+    guiItem: ENCHANTMENT_TABLE
+jobs:
+  Madenci:
+    displayName: "&6Madenci"
+    info: |
+      &eMadenlerde kazı yaparak
+      &epara ve &e&lpuan &ekazanın!
+    guiItem: DIAMOND_ORE
+  İnşaatçı:
+    displayName: "&6İnşaatçı"
+    info: |
+      &eÇeşitli inşa blokları
+      &ekoyarak para kazanın!
+    guiItem: BRICK
+  Çiftçi:
+    displayName: "&6Çiftçi"
+    info: |
+      &eTarım ve hayvancılık
+      &eyaparak para kazanın!
+    guiItem: GOLD_HOE
+  Avcı:
+    displayName: "&6Avcı"
+    info: |
+      &eYaratık ve hayvan öldürerek
+      &epara ve &e&lpuan &ekazanın!
+    guiItem: ROTTEN_FLESH
+  Boss_Avcısı:
+    displayName: "&6Boss Avcısı"
+    info: |
+      &eBoss öldürerek
+      &epara kazanın!
+    guiItem: 'SKULL_ITEM:2'
+  Kelle_Avcısı:
+    displayName: "&6Kelle Avcısı"
+    info: |
+      &eOyuncu öldürerek
+      &epara kazanın!
+      &e
+      &eAyrıca her oyuncu
+      &eöldürdüğünüzde kafasını
+      &edüşürme şansınız vardır!
+    guiItem: 'SKULL_ITEM:3'
+  Zanaatkar:
+    displayName: "&6Zanaatkar"
+    info: |
+      &eÜretim yaparak
+      &epara kazanın!
+    guiItem: STICK
+  Demirci:
+    displayName: "&6Demirci"
+    info: |
+      &eSilah, zırh işleyerek
+      &eya da tamir ederek
+      &epara kazanın!
+    guiItem: ANVIL
+  Simyager:
+    displayName: "&6Simyager"
+    info: |
+      &eİksir yaparak
+      &epara kazanın!
+    guiItem: BREWING_STAND_ITEM
+  Büyücü:
+    displayName: "&6Büyücü"
+    info: |
+      &eEşyaları ya da kitapları
+      &ebüyüleyerek para kazanın!
     guiItem: ENCHANTMENT_TABLE

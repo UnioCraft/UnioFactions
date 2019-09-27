@@ -61,8 +61,6 @@ public class UnioFactions extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        saveDefaultConfig();
-
         if (!Bukkit.getPluginManager().isPluginEnabled("Factions")) {
             throw new RuntimeException("Factions plugin couldn't find. UnioFactions is disabling.");
         }
@@ -132,14 +130,14 @@ public class UnioFactions extends JavaPlugin {
     }
 
     public String getMessage(String configSection) {
-        if (getConfig().getString(configSection) == null) return null;
-        return ChatColor.translateAlternateColorCodes('&', getConfig().getString(configSection).replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix));
+        if (getConfigManager().getConfig(ConfigManager.Config.LANG).getString(configSection) == null) return null;
+        return ChatColor.translateAlternateColorCodes('&', getConfigManager().getConfig(ConfigManager.Config.LANG).getString(configSection).replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix));
     }
 
     public List<String> getMessages(String configSection) {
-        if (getConfig().getStringList(configSection) == null) return null;
+        if (getConfigManager().getConfig(ConfigManager.Config.LANG).getStringList(configSection) == null) return null;
         List<String> newList = new ArrayList<>();
-        for (String msg : getConfig().getStringList(configSection)) {
+        for (String msg : getConfigManager().getConfig(ConfigManager.Config.LANG).getStringList(configSection)) {
             newList.add(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix)));
         }
         return newList;
