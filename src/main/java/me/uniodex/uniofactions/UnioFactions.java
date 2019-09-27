@@ -11,10 +11,12 @@ import me.uniodex.uniofactions.listeners.PlayerListeners;
 import me.uniodex.uniofactions.listeners.ProtectionListeners;
 import me.uniodex.uniofactions.managers.*;
 import me.uniodex.uniofactions.utils.Utils;
+import me.uniodex.uniofactions.utils.packages.headgetter.HeadGetter;
 import me.uniodex.uniofactions.utils.packages.menubuilder.inventory.InventoryListener;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +59,8 @@ public class UnioFactions extends JavaPlugin {
     private Permission permission;
     @Getter
     private InventoryListener inventoryListener;
+    @Getter
+    private HeadGetter headGetter;
 
     public void onEnable() {
         instance = this;
@@ -94,6 +98,7 @@ public class UnioFactions extends JavaPlugin {
         chatColorManager = new ChatColorManager(this);
         vipManager = new VIPManager((this));
         questManager = new QuestManager((this));
+        headGetter = new HeadGetter(this);
         menuManager = new MenuManager(this);
 
         if (Bukkit.getPluginManager().isPluginEnabled("Jobs")) {
@@ -115,6 +120,7 @@ public class UnioFactions extends JavaPlugin {
         new CmdChatcolor(this);
         new CmdCommands(this);
         new CmdQuests(this);
+        new CmdMeslek(this);
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(this, this::clearOldLogs, 1L);
     }
@@ -130,14 +136,28 @@ public class UnioFactions extends JavaPlugin {
     }
 
     public String getMessage(String configSection) {
-        if (getConfigManager().getConfig(ConfigManager.Config.LANG).getString(configSection) == null) return null;
-        return ChatColor.translateAlternateColorCodes('&', getConfigManager().getConfig(ConfigManager.Config.LANG).getString(configSection).replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix));
+        FileConfiguration config;
+        if (configSection.startsWith("messages.")) {
+            config = getConfigManager().getConfig(ConfigManager.Config.LANG);
+        } else {
+            config = getConfig();
+        }
+        if (config.getString(configSection) == null) return null;
+
+        return ChatColor.translateAlternateColorCodes('&', config.getString(configSection).replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix));
     }
 
     public List<String> getMessages(String configSection) {
-        if (getConfigManager().getConfig(ConfigManager.Config.LANG).getStringList(configSection) == null) return null;
+        FileConfiguration config;
+        if (configSection.startsWith("messages.")) {
+            config = getConfigManager().getConfig(ConfigManager.Config.LANG);
+        } else {
+            config = getConfig();
+        }
+        if (config.getString(configSection) == null) return null;
+
         List<String> newList = new ArrayList<>();
-        for (String msg : getConfigManager().getConfig(ConfigManager.Config.LANG).getStringList(configSection)) {
+        for (String msg : config.getStringList(configSection)) {
             newList.add(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("%hataprefix%", hataPrefix).replaceAll("%bilgiprefix%", bilgiPrefix).replaceAll("%dikkatprefix%", dikkatPrefix).replaceAll("%prefix%", bilgiPrefix)));
         }
         return newList;

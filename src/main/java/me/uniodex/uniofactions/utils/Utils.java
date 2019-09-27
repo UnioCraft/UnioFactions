@@ -8,7 +8,10 @@ import me.uniodex.uniofactions.UnioFactions;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,5 +110,41 @@ public class Utils {
         }
 
         return count;
+    }
+
+    public static boolean shouldJoin(ClickType clickType, List<String> lore) {
+        if (clickType.isLeftClick() &&
+                lore.get(lore.size() - 1).equals(UnioFactions.getInstance().getMessage("messages.jobLeftClickToJoin"))) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean shouldLeave(ClickType clickType, List<String> lore) {
+        if (clickType.isRightClick() &&
+                lore.get(lore.size() - 1).equals(UnioFactions.getInstance().getMessage("messages.jobRightClickToLeft"))) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void hideFlags(ItemMeta meta) {
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+    }
+
+    public static boolean matchCommands(String[] configCommand, String[] givenCommand) {
+        if (givenCommand.length < configCommand.length) return false;
+        if (!configCommand[0].equalsIgnoreCase(givenCommand[0])) return false;
+
+        for (int i = 1; i < configCommand.length; i++) {
+            if (configCommand[i].startsWith("<")) return true;
+            if (!configCommand[i].equalsIgnoreCase(givenCommand[i])) return false;
+        }
+        return true;
     }
 }

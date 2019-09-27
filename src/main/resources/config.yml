@@ -10,6 +10,9 @@ commandInstances:
   "kasa": "crates"
   "kasalar": "crates"
   "warp market": "market"
+  "meslek katıl <text>": "jobs join %arg-1%"
+  "meslek ayrıl <text>": "jobs leave %arg-1%"
+  "meslek tümündenayrıl": "jobs leaveall"
 npcCommands:
   '0': bilgi
 mineNames: #TODO
@@ -508,67 +511,67 @@ quests:
     guiItem: ENCHANTMENT_TABLE
 jobs:
   Madenci:
-    displayName: "&6Madenci"
+    menuDisplayName: "&6Madenci"
     info: |
-      &eMadenlerde kazı yaparak
-      &epara ve &e&lpuan &ekazanın!
+      &7Madenlerde kazı yaparak
+      &7para ve &7&lpuan &7kazanın!
     guiItem: DIAMOND_ORE
   İnşaatçı:
-    displayName: "&6İnşaatçı"
+    menuDisplayName: "&6İnşaatçı"
     info: |
-      &eÇeşitli inşa blokları
-      &ekoyarak para kazanın!
+      &7Çeşitli inşa blokları
+      &7koyarak para kazanın!
     guiItem: BRICK
   Çiftçi:
-    displayName: "&6Çiftçi"
+    menuDisplayName: "&6Çiftçi"
     info: |
-      &eTarım ve hayvancılık
-      &eyaparak para kazanın!
+      &7Tarım ve hayvancılık
+      &7yaparak para kazanın!
     guiItem: GOLD_HOE
   Avcı:
-    displayName: "&6Avcı"
+    menuDisplayName: "&6Avcı"
     info: |
-      &eYaratık ve hayvan öldürerek
-      &epara ve &e&lpuan &ekazanın!
+      &7Yaratık ve hayvan öldürerek
+      &7para ve &7&lpuan &7kazanın!
     guiItem: ROTTEN_FLESH
   Boss_Avcısı:
-    displayName: "&6Boss Avcısı"
+    menuDisplayName: "&6Boss Avcısı"
     info: |
-      &eBoss öldürerek
-      &epara kazanın!
+      &7Boss öldürerek
+      &7para kazanın!
     guiItem: 'SKULL_ITEM:2'
   Kelle_Avcısı:
-    displayName: "&6Kelle Avcısı"
+    menuDisplayName: "&6Kelle Avcısı"
     info: |
-      &eOyuncu öldürerek
-      &epara kazanın!
-      &e
-      &eAyrıca her oyuncu
-      &eöldürdüğünüzde kafasını
-      &edüşürme şansınız vardır!
+      &7Oyuncu öldürerek
+      &7para kazanın!
+      &7
+      &7Ayrıca her oyuncu
+      &7öldürdüğünüzde kafasını
+      &7düşürme şansınız vardır!
     guiItem: 'SKULL_ITEM:3'
   Zanaatkar:
-    displayName: "&6Zanaatkar"
+    menuDisplayName: "&6Zanaatkar"
     info: |
-      &eÜretim yaparak
-      &epara kazanın!
+      &7Üretim yaparak
+      &7para kazanın!
     guiItem: STICK
   Demirci:
-    displayName: "&6Demirci"
+    menuDisplayName: "&6Demirci"
     info: |
-      &eSilah, zırh işleyerek
-      &eya da tamir ederek
-      &epara kazanın!
+      &7Silah, zırh işleyerek
+      &7ya da tamir ederek
+      &7para kazanın!
     guiItem: ANVIL
   Simyager:
-    displayName: "&6Simyager"
+    menuDisplayName: "&6Simyager"
     info: |
-      &eİksir yaparak
-      &epara kazanın!
+      &7İksir yaparak
+      &7para kazanın!
     guiItem: BREWING_STAND_ITEM
   Büyücü:
-    displayName: "&6Büyücü"
+    menuDisplayName: "&6Büyücü"
     info: |
-      &eEşyaları ya da kitapları
-      &ebüyüleyerek para kazanın!
+      &7Eşyaları ya da kitapları
+      &7büyüleyerek para kazanın!
     guiItem: ENCHANTMENT_TABLE

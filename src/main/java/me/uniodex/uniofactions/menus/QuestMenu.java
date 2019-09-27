@@ -9,7 +9,6 @@ import me.uniodex.uniofactions.utils.packages.menubuilder.inventory.InventoryMen
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -69,12 +68,7 @@ public class QuestMenu {
         List<String> lore = Arrays.asList(loreStr.split("\n"));
         meta.setLore(lore);
 
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
-        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        Utils.hideFlags(meta);
         guiItem.setItemMeta(meta);
         return guiItem;
     }

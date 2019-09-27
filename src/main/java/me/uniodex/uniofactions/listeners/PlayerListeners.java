@@ -4,6 +4,7 @@ import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.uniodex.uniofactions.UnioFactions;
+import me.uniodex.uniofactions.utils.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -71,7 +72,7 @@ public class PlayerListeners implements Listener {
                 return;
             }
         }
-		event.getRecipients().clear();
+        event.getRecipients().clear();
         //
     }
 
@@ -93,18 +94,15 @@ public class PlayerListeners implements Listener {
         Player p = event.getPlayer();
 
         for (String cmd : plugin.getMainManager().getCommands().keySet()) {
-            if (cmd.split(" ")[0].equalsIgnoreCase(command[0])) {
-                if (command.length < cmd.split(" ").length) continue;
-                String commandToUse = plugin.getMainManager().getCommands().get(cmd);
-                for (int i = 0; i < command.length; i++) {
-                    commandToUse = commandToUse.replaceAll("%arg-" + i + "%", command[i]);
-                    commandToUse = commandToUse.replaceAll("%args-" + i + "%", StringUtils.join(command, ' ', i, command.length));
-                }
-
-                p.performCommand(commandToUse);
-                event.setCancelled(true);
-                break;
+            if (!Utils.matchCommands(cmd.split(" "), command)) continue;
+            String commandToUse = plugin.getMainManager().getCommands().get(cmd);
+            for (int i = 0; i < command.length; i++) {
+                commandToUse = commandToUse.replaceAll("%arg-" + i + "%", command[i]);
+                commandToUse = commandToUse.replaceAll("%args-" + i + "%", StringUtils.join(command, ' ', i, command.length));
             }
+            p.performCommand(commandToUse);
+            event.setCancelled(true);
+            break;
         }
     }
 }

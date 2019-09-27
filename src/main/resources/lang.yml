@@ -34,6 +34,7 @@ messages:
   vipRewardHasGiven: "%bilgiprefix%VIP ödülü başarıyla verildi."
   playerIsNotOnline: "%hataprefix%Belirttiğiniz oyuncu oyunda değil."
   questNotExist: "%hataprefix%Belirttiğiniz görev mevcut değil."
+  jobNotExist: "%hataprefix%Belirttiğiniz meslek mevcut değil."
   questAlreadyCompleted: "%hataprefix%Bu görevi daha önce tamamlamışsınız."
   commandCompleteQuestSuccess: "%bilgiprefix%Görev başarıyla tamamlandı!"
   questIsNotCompleted: "%hataprefix%Görev tamamlanamadı. Öncelikle görev şartlarını yerine getirmelisiniz."
@@ -59,3 +60,57 @@ messages:
     %questRewards%
 
     %questAction%
+  jobsGUITitle: "&0Meslekler"
+  jobMenuLore: |
+    &e
+    %jobInfo%
+    &7%jobLevel%
+    %clickAction%
+  jobLevel: |
+    &6Seviye: &f%jobLevel%
+    &6EXP: &f%jobExp%/%jobMaxExp%
+  jobLeftClickToJoin: '&aKatılmak &7için sol tıkla!'
+  jobRightClickToLeft: '&cAyrılmak &7için sağ tıkla!'
+  jobsGUIQuestsItemName: "&6Görevler"
+  jobsGUIQuestsItemLore:
+    - "&7Görevler menüsünü"
+    - "&7açmak için tıkla!"
+  jobsGUITop10ItemName: "&6Meslek Top 10"
+  jobsGUITop10ItemLore:
+    - "&7En yüksek seviyeli"
+    - "&7meslek oyuncularını"
+    - "&7görmek için tıkla!"
+  jobsGUISettingsItemName: "&6Ayarlar"
+  jobsGUISettingsItemLore:
+    - "&7Meslek ayarları"
+    - "&7yapmak için tıkla!"
+  topMenuGUITitle: "Meslek Top 10"
+  topMenuGUITitleWithJob: "%job% Top 10"
+  toptenPlayerLore: |
+    &e
+    &6Seviye: &f%jobLevel%
+    &6EXP: &f%jobExp%
+    &e
+  toptenJobLore: |
+    &e%job% &7mesleğinin en yüksek
+    &7seviyeli oyuncularını görmek
+    &7için tıkla!
+  settingsMenuGUITitle: "Meslek Ayarları"
+  settingsActionBar: "Para Kazanma Bilgisi"
+  settingsActionBarEnableLore:
+    - "&7Eylem çubuğunda görünen"
+    - "&7para ve xp kazanma bilgisini"
+    - "&aetkinleştir&7."
+  settingsActionBarDisableLore:
+    - "&7Eylem çubuğunda görünen"
+    - "&7para ve xp kazanma bilgisini"
+    - "&cdevre dışı &7bırak."
+  settingsBossBar: "Meslek Gelişim Bilgisi"
+  settingsBossBarEnableLore:
+    - "&7Boss barında görünen"
+    - "&7meslek seviye gelişimini"
+    - "&aetkinleştir&7."
+  settingsBossBarDisableLore:
+    - "&7Boss barında görünen"
+    - "&7meslek seviye gelişimini"
+    - "&cdevre dışı &7bırak."
