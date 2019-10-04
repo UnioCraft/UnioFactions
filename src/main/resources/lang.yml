@@ -43,6 +43,7 @@ messages:
   questIsOneTimeOnly: "Tek Seferlik Görev"
   questClickToComplete: "&aGörevi tamamlamak için tıkla!"
   questIsNotCompletedGui: "&c&lGÖREV TAMAMLANMADI"
+  questCompletionInfo: "&bilgiprefix%Bir görevin şartlarını yerine getirdiniz! Hemen /görevler yazın ve görevi bitirerek ödülünüzü alın!"
   questYouMustBeInJob: |
     &cBu görevi yapabilmek için
     &c%job% mesleğinde olmalısınız!

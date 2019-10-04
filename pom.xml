@@ -69,11 +69,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.12.2-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <groupId>Spigot</groupId>
+            <artifactId>Spigot</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${library}/spigot1.12.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

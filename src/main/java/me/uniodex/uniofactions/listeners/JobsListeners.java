@@ -8,14 +8,18 @@ import me.uniodex.uniocustomitems.managers.ItemManager;
 import me.uniodex.uniofactions.UnioFactions;
 import me.uniodex.uniofactions.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Random;
 
 public class JobsListeners implements Listener {
 
@@ -93,5 +97,24 @@ public class JobsListeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         plugin.getJobsManager().clearPlayerData(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent event) {
+        if (event.getEntity().getKiller() == null) return;
+        Player victim = event.getEntity();
+        Player killer = event.getEntity().getKiller();
+        Location location = event.getEntity().getLocation();
+
+        if (plugin.getJobsManager().isPlayerInJob(killer.getName(), "Kelle_Avcısı")) {
+            int chance = Math.round(20 + (plugin.getJobsManager().getJobLevel(killer.getName(), "Kelle_Avcısı") / 10));
+            int maxChance = 200;
+
+            int val = new Random().nextInt(maxChance) + 1;
+            if (val <= chance) {
+                Bukkit.getScheduler().runTask(plugin, () -> location.getWorld().dropItemNaturally(location, plugin.getSkullManager().getSkull(victim.getName())));
+            }
+        }
+
     }
 }

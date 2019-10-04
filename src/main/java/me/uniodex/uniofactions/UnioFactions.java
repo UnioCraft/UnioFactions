@@ -61,6 +61,10 @@ public class UnioFactions extends JavaPlugin {
     private InventoryListener inventoryListener;
     @Getter
     private HeadGetter headGetter;
+    @Getter
+    private SQLManager sqlManager;
+    @Getter
+    private SkullManager skullManager;
 
     public void onEnable() {
         instance = this;
@@ -94,12 +98,14 @@ public class UnioFactions extends JavaPlugin {
 
         // Managers
         configManager = new ConfigManager(this);
+        sqlManager = new SQLManager(this);
         mainManager = new MainManager(this);
         chatColorManager = new ChatColorManager(this);
         vipManager = new VIPManager((this));
         questManager = new QuestManager((this));
         headGetter = new HeadGetter(this);
         menuManager = new MenuManager(this);
+        skullManager = new SkullManager(this);
 
         if (Bukkit.getPluginManager().isPluginEnabled("Jobs")) {
             jobsManager = new JobsManager((this));

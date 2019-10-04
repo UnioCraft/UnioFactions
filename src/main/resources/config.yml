@@ -10,9 +10,14 @@ commandInstances:
   "kasa": "crates"
   "kasalar": "crates"
   "warp market": "market"
-  "meslek katıl <text>": "jobs join %arg-1%"
-  "meslek ayrıl <text>": "jobs leave %arg-1%"
+  "meslek katıl <text>": "jobs join %arg-2%"
+  "meslek ayrıl <text>": "jobs leave %arg-2%"
   "meslek tümündenayrıl": "jobs leaveall"
+database:
+  hostName: test.com
+  port: 3306
+  userName: test
+  password: test
 npcCommands:
   '0': bilgi
 mineNames: #TODO

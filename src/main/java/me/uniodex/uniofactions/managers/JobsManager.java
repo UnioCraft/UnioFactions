@@ -1,6 +1,8 @@
 package me.uniodex.uniofactions.managers;
 
 import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.container.Job;
+import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import me.uniodex.uniofactions.UnioFactions;
 import me.uniodex.uniofactions.utils.Utils;
@@ -54,5 +56,16 @@ public class JobsManager {
         if (jobsPlayer == null) return false;
         if (Jobs.getJob(job) == null) return false;
         return jobsPlayer.isInJob(Jobs.getJob(job));
+    }
+
+    public int getJobLevel(String player, String jobName) {
+        JobsPlayer jobsPlayer = Jobs.getPlayerManager().getJobsPlayer(player);
+        Job job = Jobs.getJob(jobName);
+        if (jobsPlayer == null) return 0;
+        if (job == null) return 0;
+        JobProgression jobProgression = jobsPlayer.getJobProgression(job);
+        if (jobProgression == null) return 0;
+
+        return jobProgression.getLevel();
     }
 }

@@ -105,6 +105,7 @@ public class CmdUniofactions implements CommandExecutor {
                     }
 
                     plugin.getQuestManager().setQuestCompleted(target, quest);
+                    targetPlayer.sendMessage(plugin.getMessage("messages.questCompletionInfo"));
                     sender.sendMessage(plugin.getMessage("messages.commandCompleteQuestSuccess"));
                 }
             }
