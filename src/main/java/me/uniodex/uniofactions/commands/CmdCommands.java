@@ -22,6 +22,10 @@ public class CmdCommands implements CommandExecutor {
 
         sender.sendMessage(plugin.getMessage("messages.commandCommandsHeader").replaceAll("%page%", String.valueOf(page)).replaceAll("%maxpage%", String.valueOf(plugin.getMainManager().getCommandListPages().size())));
 
+        if (plugin.getMainManager().getCommandListPages().get(page) == null) {
+            page = 1;
+        }
+
         for (String line : plugin.getMainManager().getCommandListPages().get(page)) {
             sender.sendMessage(Utils.colorizeMessage(line));
         }

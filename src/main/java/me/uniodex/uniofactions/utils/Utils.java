@@ -136,15 +136,4 @@ public class Utils {
         meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
     }
-
-    public static boolean matchCommands(String[] configCommand, String[] givenCommand) {
-        if (givenCommand.length < configCommand.length) return false;
-        if (!configCommand[0].equalsIgnoreCase(givenCommand[0])) return false;
-
-        for (int i = 1; i < configCommand.length; i++) {
-            if (configCommand[i].startsWith("<")) return true;
-            if (!configCommand[i].equalsIgnoreCase(givenCommand[i])) return false;
-        }
-        return true;
-    }
 }

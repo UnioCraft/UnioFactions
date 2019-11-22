@@ -16,13 +16,10 @@ public class MainManager {
     private UnioFactions plugin;
     @Getter
     private Map<Integer, List<String>> commandListPages;
-    @Getter
-    private Map<String, String> commands = new HashMap<>();
 
     public MainManager(UnioFactions plugin) {
         this.plugin = plugin;
         updateCommandListPages();
-        loadCommandInstances();
     }
 
     public void updateCommandListPages() {
@@ -40,14 +37,6 @@ public class MainManager {
                 contentClone.remove(0);
             }
             commandListPages.put(i, pageLines);
-        }
-    }
-
-    public void loadCommandInstances() {
-        commands.clear();
-        for (String command : plugin.getConfig().getConfigurationSection("commandInstances").getKeys(false)) {
-            String instance = plugin.getConfig().getConfigurationSection("commandInstances").getString(command);
-            commands.put(command, instance);
         }
     }
 
