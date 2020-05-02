@@ -138,7 +138,6 @@ public class UnioFactions extends JavaPlugin {
     public void reload() {
         reloadConfig();
         getMainManager().updateCommandListPages();
-        getMainManager().loadCommandInstances();
     }
 
     public String getMessage(String configSection) {
